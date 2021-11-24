@@ -14,6 +14,7 @@ def main():
 
 
 def get_password():
+    """Get password from the user with error checking."""
     password = input(f"Enter a password that is at least {MINIMUM_LENGTH} characters long: ")
     while len(password) < MINIMUM_LENGTH:
         password = input(f"Enter a password that is at least {MINIMUM_LENGTH} characters long: ")
@@ -21,6 +22,7 @@ def get_password():
 
 
 def display_asterisk(password):
+    """Print as many asterisks as the length of the password to the screen."""
     print('*' * len(password))
 
 
