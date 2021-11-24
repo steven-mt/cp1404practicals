@@ -37,3 +37,6 @@ def main():
         print(MENU)
         choice = input(">>> ").upper()
     print("Thank you.")
+
+
+main()
