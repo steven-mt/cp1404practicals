@@ -30,4 +30,5 @@ def display_details(data):
     for details in data:
         print(f"{details[0]} is taught by {details[1]:12} and has {details[2]:3} students")
 
+
 main()
