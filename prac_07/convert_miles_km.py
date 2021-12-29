@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 
 MILES_IN_KM = 1.60934
+INVALID_INPUT_SUBSTITUTE = 0
 
 
 class MilesToKilometresApp(App):
@@ -11,16 +12,24 @@ class MilesToKilometresApp(App):
         self.root = Builder.load_file('convert_miles_km.kv')
         return self.root
 
-    def handle_convert(self, value):
+    def handle_convert(self):
         """Handle conversion of miles to km."""
-        result = float(value) * MILES_IN_KM
+        result = self.get_valid_input() * MILES_IN_KM
         self.root.ids.output_label.text = str(result)
 
-    def handle_increment(self, miles, change):
+    def handle_increment(self, change):
         """Handle increment or decrement of input and updates output."""
-        result = float(miles) + change
+        result = self.get_valid_input() + change
         self.root.ids.input_number.text = str(result)
-        self.handle_convert(self.root.ids.input_number.text)
+        self.handle_convert()
+
+    def get_valid_input(self):
+        """Try to get a valid number from the input, otherwise use a substitute value."""
+        try:
+            value = float(self.root.ids.input_number.text)
+            return value
+        except ValueError:
+            return INVALID_INPUT_SUBSTITUTE
 
 
 MilesToKilometresApp().run()
